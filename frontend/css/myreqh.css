@@ -1,0 +1,39 @@
+body{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+h4 {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+    border-bottom: solid #983222 1px;
+}
+
+h3 {
+    text-align: left;
+    border-bottom: solid #983222 3px;
+}
+
+.theTable {
+        margin-left: 1px;
+        float: left;
+}
+
+.rejTable {
+        float: left;
+}
+
+form {
+    float: right;
+}
+
+.aButton {
+    float: right;
+    border-style: round;
+}
+
+table, th, td {
+    border: 1px solid black;
+}

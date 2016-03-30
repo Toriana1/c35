@@ -1,4 +1,5 @@
 var express = require('express');
+var database = require('./database.js');
 var app = express();
 var port = process.env.PORT || 1337;
 var bodyParser = require('body-parser');
@@ -14,6 +15,20 @@ app.use(express.static(__dirname.replace('backend', 'frontend')));
 var router = require('./c35_modules/router');
 app.use('/', router);
 
+module.exports = function() {
+
+  router.get('/trains', function(req,res){
+    database.executeQuery("SELECT * FROM trains", function(results) {
+      res.send(results);
+    });
+  });
+
+  router.get('/trainList', function(req,res){
+    return res.render('trainList.html');
+  });
+
+  return router
+}();
 app.listen(port, function(){
   console.log("Application is running:")
   console.log("Listening on " + port);
