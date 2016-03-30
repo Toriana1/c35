@@ -15,7 +15,7 @@ app.get('/', function(req,res){
 //rendering our approvals page
 app.get('/approvals', function(req,res){
   console.log('app approvals / requested');
-  return res.render("approvals.html");
+  return res.render("approvals2.html");
 });
 
 app.get('/getEmply', function(req,res){
