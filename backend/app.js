@@ -1,29 +1,31 @@
 var express = require('express');
+var database = require('./database.js');
 var app = express();
 var port = process.env.PORT || 1337;
-var bodyParser = require('body-parser');
-app.use( bodyParser.json() );
-app.use( bodyParser.urlencoded({ extended: true }) );
-
-//Set up to render the views correctly from the views folder
+//Set up to render the html correctly from the html folder
 app.engine('html', require('ejs').renderFile);
 app.set('views', __dirname.replace('backend', 'frontend') + '/html');
 app.use(express.static(__dirname.replace('backend', 'frontend')));
 
-app.get('/hi', function(req,res){
-  console.log('app hi / requested');
-  return res.status(200).send("hi there programmer");
+app.get('/', function(req,res){
+  console.log('app root / requested');
+  return res.status(200).send("hello world");
 });
-app.get('/approvals2.html', function(req,res){
-  console.log('app approvals2 / requested');
+
+//rendering our approvals page
+app.get('/approvals', function(req,res){
+  console.log('app approvals / requested');
   return res.render("approvals2.html");
 });
 
-//Set up to use all the routes from router.js
-var router = require('./c35_modules/router');
-app.use('/', router);
+app.get('/getEmply', function(req,res){
+  console.log('app getEmply / requested');
+  database.executeQuery("SELECT * FROM trainrequest.public.TTX_Empl_Trng_Reqst", function(results) {
+      res.send(results);
+  });
+});
 
-app.listen(port, function(){
-  console.log("Application is running:")
-  console.log("Listening on " + port);
+app.get('/employee', function(req,res){
+  console.log('app employee / requested');
+  return res.render("empl.html");
 });
