@@ -1,17 +1,28 @@
-getStub('/approvals2', function(results){
-    var tableString = "<tr><th>Train Name</th><th>In Service</th><th>Number of Available Cars</th></tr>";
-    console.log (results);
-    $('#ftable').html(tableString);
-  });
+$(document).ready(function(){
+    //getStub('/getEmply', function(results){
+    $.get('/getEmply', function(results){
+    var employeeString = "<thead><tr><th data-toggle='true'>Employee Id</th><th data-hide='phone'>Course Name</th><th data-hide'tablet,phone'>Begin Date</th><th data-hide='tablet,phone'>End Date</th><th>Supp Appr</th><th>DH Appr</th><th>Completion Status</th></tr></thead>";
+    console.log(results);
+    $.each(results, function(index, rowObject){
+      employeeString += "<tr><td>" + rowObject.trng_reqst_nbr + "</td>" +
+        "<td>" + rowObject.trng_cors_nm + "</td>" +
+        "<td>" + rowObject.trng_cors_strt_dt + "</td>" +
+        "<td>" + rowObject.trng_cors_end_dt + "</td>" +
+        "<td>" + rowObject.trng_reqst_immed_supv_apvl_flg + "</td>" +
+        "<td>" + rowObject.trng_reqst_dept_hd_apvl_flg + "</td>" +
+        "<td>" + rowObject.trng_cors_compl_flg + "</td></tr>";
+        
+    });
 
+     $('#ftable').html(employeeString);
+    });
+});
 
 
 function getStub(endpoint, callback){
   var stubbedJson="";
-  if (endpoint =="/getapprovals2"){
-
-
-stubbedJson = [
+  if (endpoint =="/getEmply"){
+    stubbedJson = [
    {
       "trng_reqst_nbr":20140015,
       "cntct_email_addr":"ALAN_TANG@TTX.COM",
@@ -365,5 +376,6 @@ stubbedJson = [
       "lst_updt_id":"MISBGS  "
    }
 ];
-}        callback(stubbedJson);
+  }
+  callback(stubbedJson);  
 }
