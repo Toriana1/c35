@@ -25,7 +25,27 @@ app.get('/getEmply', function(req,res){
   });
 });
 
+<<<<<<< HEAD
 app.get('/employee', function(req,res){
   console.log('app employee / requested');
   return res.render("empl.html");
+=======
+module.exports = function() {
+
+  router.get('/trains', function(req,res){
+    database.executeQuery("SELECT * FROM trains", function(results) {
+      res.send(results);
+    });
+  });
+
+  router.get('/trainList', function(req,res){
+    return res.render('trainList.html');
+  });
+
+  return router
+}();
+app.listen(port, function(){
+  console.log("Application is running:")
+  console.log("Listening on " + port);
+>>>>>>> a4dec2d48569224729914b0e65343ff22b5f3d57
 });
