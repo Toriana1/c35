@@ -11,6 +11,15 @@ app.engine('html', require('ejs').renderFile);
 app.set('views', __dirname.replace('backend', 'frontend') + '/html');
 app.use(express.static(__dirname.replace('backend', 'frontend')));
 
+app.get('/hi', function(req,res){
+  console.log('app hi / requested');
+  return res.status(200).send("hi there programmer");
+});
+app.get('/approvals2.html', function(req,res){
+  console.log('app approvals2 / requested');
+  return res.render("approvals2.html");
+});
+
 //Set up to use all the routes from router.js
 var router = require('./c35_modules/router');
 app.use('/', router);
